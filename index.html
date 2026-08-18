@@ -1131,6 +1131,19 @@
       .red-envelope.open .envelope-heart { animation: none; }
     }
 
+    @media (max-width: 860px) {
+      #our-story .section-inner::after {
+        /* Follow the responsive photo edge on tablets and phones. */
+        left: min(calc(92% - 8.5rem), 21.5rem);
+        right: auto;
+        top: 25.75rem;
+        bottom: auto;
+        width: max-content;
+        height: auto;
+        white-space: nowrap;
+      }
+    }
+
     @media (max-width: 560px) {
       .hero::after { display: none; }
       .hero-inner::before { left: 0; top: 14%; }
@@ -1146,7 +1159,9 @@
       #faq::before { font-size: 9rem; opacity: .25; }
       #gallery { padding-bottom: 6.5rem; }
       .red-envelope { margin-top: 5.25rem; }
-      #our-story .section-inner::after { left: auto; right: 0; top: 22rem; bottom: auto; }
+      #our-story .section-inner::after {
+        top: 21.75rem;
+      }
     }
   </style>
 </head>
