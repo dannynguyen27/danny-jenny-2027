@@ -1064,14 +1064,14 @@
     .envelope-heart:nth-last-child(1) { --heart-x: 4rem; --heart-r: 20deg; }
     .red-envelope:hover { transform: rotate(-3deg) translateY(-3px); box-shadow: 10px 12px 0 rgba(48,66,84,.16); animation-play-state: paused; }
     .red-envelope:focus-visible { outline: 3px solid var(--deep); outline-offset: 7px; }
-    .red-envelope.open { transform: rotate(1deg) translateY(1rem); animation: none; }
-    .red-envelope.open::before { transform: rotateX(180deg); z-index: 0; transition: transform .55s cubic-bezier(.2,.8,.2,1), z-index 0s; }
-    .red-envelope.open::after { opacity: 0; transform: translate(-50%, -35%) rotate(10deg) scale(.7); }
-    .red-envelope.open .envelope-open-me { opacity: 0; transform: rotate(-7deg) scale(.75); }
-    .red-envelope.open .envelope-card { transform: translateY(-82%) rotate(-2deg); opacity: 1; }
-    .red-envelope.open .envelope-heart { animation: envelopeHeart .9s .25s ease-out both; }
-    .red-envelope.open .envelope-heart:nth-last-child(2) { animation-delay: .34s; }
-    .red-envelope.open .envelope-heart:nth-last-child(1) { animation-delay: .42s; }
+    .red-envelope.open { transform: rotate(1deg) translateY(1rem); animation: none; transition-duration: .42s; }
+    .red-envelope.open::before { transform: rotateX(180deg); z-index: 0; transition: transform .66s cubic-bezier(.2,.8,.2,1), z-index 0s; }
+    .red-envelope.open::after { opacity: 0; transform: translate(-50%, -35%) rotate(10deg) scale(.7); transition-duration: .24s, .42s; }
+    .red-envelope.open .envelope-open-me { opacity: 0; transform: rotate(-7deg) scale(.75); transition-duration: .24s, .3s; }
+    .red-envelope.open .envelope-card { transform: translateY(-82%) rotate(-2deg); opacity: 1; transition-duration: .78s, .24s; }
+    .red-envelope.open .envelope-heart { animation: envelopeHeart 1.08s .3s ease-out both; }
+    .red-envelope.open .envelope-heart:nth-last-child(2) { animation-delay: .408s; }
+    .red-envelope.open .envelope-heart:nth-last-child(1) { animation-delay: .504s; }
     @keyframes envelopeHeart {
       0% { opacity: 0; transform: translate(-50%, 0) scale(.4) rotate(0); }
       35% { opacity: 1; }
