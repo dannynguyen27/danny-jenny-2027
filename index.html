@@ -1163,6 +1163,152 @@
         top: 21.75rem;
       }
     }
+
+    /* ── FLUID LAYOUT SYSTEM ──
+       Keep spacing responsive, but bound it so phones and ultrawide screens
+       never produce extreme gaps. Content that must stay aligned lives in
+       normal grid flow instead of relying on viewport-specific offsets. */
+    :root {
+      --page-gutter: clamp(1.25rem, 4vw, 2rem);
+      --section-space: clamp(5rem, 8vw, 9rem);
+      --content-width: 70rem;
+    }
+
+    .section {
+      padding-block: var(--section-space);
+      padding-inline: var(--page-gutter);
+    }
+
+    .section-inner {
+      width: min(100%, var(--content-width));
+    }
+
+    .section-title {
+      font-size: clamp(3.5rem, 7vw, 7.6rem);
+      margin-bottom: clamp(2.25rem, 4vw, 3.5rem);
+    }
+
+    .content-grid,
+    .details-grid {
+      margin-top: clamp(2rem, 4vw, 3rem);
+    }
+
+    .hero {
+      min-height: 100svh;
+      padding-block: clamp(7rem, 14svh, 9rem) clamp(3rem, 8svh, 5rem);
+      padding-inline: var(--page-gutter);
+    }
+
+    .hero-inner {
+      width: min(100%, var(--content-width));
+    }
+
+    .carousel-viewport {
+      aspect-ratio: 16 / 9;
+      height: auto;
+    }
+
+    #our-story .section-inner {
+      min-height: 0;
+      display: grid;
+      grid-template-columns: minmax(16rem, 26rem) minmax(20rem, 1fr);
+      align-items: center;
+      gap: clamp(2.5rem, 6vw, 6rem);
+      padding: 0;
+    }
+
+    #our-story .section-inner::before,
+    #our-story .section-inner::after {
+      content: none;
+    }
+
+    .story-media {
+      position: relative;
+      width: min(100%, 26rem);
+      justify-self: center;
+      margin: 0;
+      transform: rotate(-2deg);
+    }
+
+    .story-media img {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 2 / 3;
+      object-fit: cover;
+      border: clamp(6px, 1vw, 10px) solid var(--cream);
+      box-shadow: 0 18px 45px rgba(48,66,84,.18);
+    }
+
+    .story-photo-label {
+      position: absolute;
+      right: clamp(-.5rem, -1vw, -.25rem);
+      bottom: clamp(.75rem, 2vw, 1.5rem);
+      padding: .65rem 1.1rem;
+      background: var(--lime);
+      border: 2px solid var(--deep);
+      box-shadow: 4px 4px 0 var(--deep);
+      color: var(--deep);
+      font: italic 600 clamp(1.15rem, 2vw, 1.5rem)/1 'Cormorant Garamond', serif;
+      white-space: nowrap;
+      transform: rotate(5deg);
+    }
+
+    .story-copy { min-width: 0; }
+
+    @media (max-width: 860px) {
+      #our-story .section-inner {
+        grid-template-columns: minmax(0, 1fr);
+        gap: clamp(2.5rem, 8vw, 4rem);
+      }
+
+      .story-media {
+        width: min(100%, 32rem);
+      }
+
+      .story-media img { aspect-ratio: 2 / 3; }
+    }
+
+    @media (max-width: 560px) {
+      :root {
+        --page-gutter: 1.25rem;
+        --section-space: clamp(4.5rem, 18vw, 5.5rem);
+      }
+
+      .section-title { font-size: clamp(3.25rem, 17vw, 5rem); }
+
+      .hero {
+        min-height: 100svh;
+        padding-top: calc(5.75rem + env(safe-area-inset-top));
+      }
+
+      .carousel-viewport {
+        height: min(190vw, 48rem);
+        aspect-ratio: auto;
+        overflow: hidden;
+      }
+
+      .carousel-slide {
+        grid-template-rows: repeat(2, minmax(0, 1fr));
+        gap: 1.25rem;
+        padding: 1rem;
+        transform: none;
+      }
+
+      .carousel-slide img {
+        width: auto;
+        height: auto;
+        max-width: min(82%, 20rem);
+        max-height: 100%;
+        object-fit: contain;
+      }
+
+      .carousel-prev { left: 1.25rem; }
+      .carousel-next { right: 1.25rem; }
+
+      #our-story .section-inner { padding: 0; }
+      .story-media img { aspect-ratio: 2 / 3; }
+    }
   </style>
 </head>
 <body>
@@ -1356,8 +1502,17 @@
   <span class="wave-edge wave-sky" aria-hidden="true"></span>
   <section class="section soft-bg" id="our-story">
     <div class="section-inner reveal">
-      <span class="section-label">How it began</span><h2 class="section-title">Our Story</h2>
-      <p class="story-prose">Our story began in 2003, when we became friends as next-door neighbors. We spent our early years learning to ride bikes together, swimming through countless summers, and sharing the everyday adventures that shaped our childhood. As we grew older, life took us in different directions, and we spent several years apart. Yet no matter how much time or distance came between us, that bond stayed quietly in the background. In 2023, we found our way back to one another and reconnected as though no time had passed. The friendship that began all those years ago had never truly left us, and what started as a childhood bond became a lifelong promise to each other.</p>
+      <figure class="story-media">
+        <picture>
+          <source media="(max-width: 860px)" srcset="assets/OurStoryPhoto-mobile.jpg" />
+          <img src="assets/OurStoryPhoto-web.jpg" width="1200" height="1800" alt="Danny and Jenny together" loading="lazy" />
+        </picture>
+        <figcaption class="story-photo-label">since 2003</figcaption>
+      </figure>
+      <div class="story-copy">
+        <span class="section-label">How it began</span><h2 class="section-title">Our Story</h2>
+        <p class="story-prose">Our story began in 2003, when we became friends as next-door neighbors. We spent our early years learning to ride bikes together, swimming through countless summers, and sharing the everyday adventures that shaped our childhood. As we grew older, life took us in different directions, and we spent several years apart. Yet no matter how much time or distance came between us, that bond stayed quietly in the background. In 2023, we found our way back to one another and reconnected as though no time had passed. The friendship that began all those years ago had never truly left us, and what started as a childhood bond became a lifelong promise to each other.</p>
+      </div>
     </div>
   </section>
 
